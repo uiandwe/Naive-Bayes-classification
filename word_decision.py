@@ -1,70 +1,70 @@
-__author__ = 'hyeonsj'
-import re
 from konlpy.tag import Kkma
-from konlpy.utils import pprint
 import pymysql
 conn = pymysql.connect(host='127.0.0.1', user='root', passwd='123qwe', db='word', charset='utf8')
 cur = conn.cursor()
 kkma = Kkma()
 
-#naive bayes classifier + smoothing
-def naive_bayes_classifier(test, train_table, all_count, table_count):
+
+#조건부 확률 계산
+def conditional_probability(test, train_table, all_count, table_count):
     counter = 0
     list_count = []
 
+    #해당 문장이 해당 테이블에 존재 하는지 확인
     for word in test:
         cur.execute("SELECT count(*) as cnt  FROM "+train_table+" where word = '"+word+"'")
-        for response in cur:
-            if int(response[0]) > 0:
-                counter = counter + 1
+        for cnt in cur:
+            if int(cnt[0]) > 0:
+                counter += 1
 
         list_count.append(counter)
         counter = 0
+
     print(list_count)
-    list_naive = []
-    for i in range(len(list_count)):
-        list_naive.append((list_count[i]+1)/float(table_count+all_count))
+
+    cal_list = []
+    for j in range(len(list_count)):
+        #다음에 * 연산할떄 0이 되지 않기 위해 +1을 해줌
+        cal_list.append((list_count[j]+1)/float(table_count+all_count))
     result = 1
-    for i in range(len(list_naive)):
-        result *= float(round(list_naive[i], 6))
-    print(float(result)*float(1.0/2.0))
-    return float(result)*float(1.0/2.0)
+    for j in range(len(cal_list)):
+        result *= float(round(cal_list[j], 6))
+
+    return_value = float(result)*float(1.0/2.0)
+    print(return_value)
+    return return_value
 
 # get the data
-f_test = open('test.txt', 'r')
+input_file = open('input.txt', 'r')
 
-# tag list (보통명사, 동사, 형용사, 보조동사, 명사추정범주)
-# 참고 : https://docs.google.com/spreadsheets/d/1OGAjUvalBuX-oZvZ_-9tEfYD2gQe7hTGsgUpiiBSXI8/edit#gid=0
-list_tag = [u'NNG', u'VV', u'VA', u'VXV', u'UN']
 list_positive = []
 list_negative = []
 
-# extract test sentence
-test_line = f_test.readline()
-test_list = kkma.pos(test_line)
-print(test_list)
-test_output = []
-for i in test_list:
-    if i[1] == u'SW':
-        if i[0] in [u'♡', u'♥']:
-            test_output.append(i[0])
-    if i[1] in list_tag:
-        test_output.append(i[0])
+#형태소 분리
+input_line = input_file.readline()
+input_kkma = kkma.pos(input_line)
 
+print(input_kkma)
+
+test_output = []
+for i in input_kkma:
+    test_output.append(i[0])
+
+#긍정 단어 전체 갯수
 cur.execute("SELECT count(*) as cnt  FROM positive ")
 positive_count = 0
 for response in cur:
     positive_count = int(response[0])
+
+#부정 단어 전체 갯수
 cur.execute("SELECT count(*) as cnt  FROM negative ")
 negative_count = 0
 for response in cur:
     negative_count = int(response[0])
 
-ALL = positive_count+negative_count
-
 # naive bayes 값 계산
-result_pos = naive_bayes_classifier(test_output, 'positive', ALL, positive_count)
-result_neg = naive_bayes_classifier(test_output, 'negative', ALL, negative_count)
+result_pos = conditional_probability(test_output, 'positive', positive_count+negative_count, positive_count)
+result_neg = conditional_probability(test_output, 'negative', positive_count+negative_count, negative_count)
 
 if result_pos > result_neg:
     print(u'긍정')
