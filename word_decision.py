@@ -1,9 +1,9 @@
 from konlpy.tag import Kkma
 import db_connect
-kkma = Kkma()
-db = db_connect.Connect()
-cur = db.get_cursor()
 
+db = db_connect.Connect()
+
+kkma = Kkma()
 
 #조건부 확률 계산
 def conditional_probability(test, train_table, all_count, table_count):
@@ -12,10 +12,10 @@ def conditional_probability(test, train_table, all_count, table_count):
 
     #해당 문장이 해당 테이블에 존재 하는지 확인
     for word in test:
-        cur.execute("SELECT count(*) as cnt  FROM "+train_table+" where word = '"+word+"'")
-        for cnt in cur:
-            if int(cnt[0]) > 0:
-                counter += 1
+        sql = "SELECT count(*) as cnt  FROM "+train_table+" where word = '"+word+"'"
+        cur = db.find(sql)
+        if int(cur) > 0:
+            counter += 1
 
         list_count.append(counter)
         counter = 0
@@ -51,16 +51,14 @@ for i in input_kkma:
     test_output.append(i[0])
 
 #긍정 단어 전체 갯수
-cur.execute("SELECT count(*) as cnt  FROM positive ")
-positive_count = 0
-for response in cur:
-    positive_count = int(response[0])
+sql = "SELECT count(*) as cnt  FROM positive "
+cur = db.find(sql)
+positive_count = int(cur)
 
 #부정 단어 전체 갯수
-cur.execute("SELECT count(*) as cnt  FROM negative ")
-negative_count = 0
-for response in cur:
-    negative_count = int(response[0])
+sql = "SELECT count(*) as cnt  FROM negative "
+cur = db.find(sql)
+negative_count = int(cur)
 
 # naive bayes 값 계산
 result_pos = conditional_probability(test_output, 'positive', positive_count+negative_count, positive_count)

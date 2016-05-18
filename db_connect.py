@@ -16,6 +16,13 @@ class Connect:
     def get_cursor(self):
         return self.cur
 
+    def find(self, sql):
+        return_cur = None
+        self.cur.execute(sql)
+        for response in self.cur:
+            return_cur = response[0]
+        return return_cur
+
     def close_db(self):
         self.cur.close()
         self.conn.close()
