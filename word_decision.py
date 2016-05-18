@@ -1,8 +1,8 @@
 from konlpy.tag import Kkma
-import pymysql
-conn = pymysql.connect(host='127.0.0.1', user='root', passwd='123qwe', db='word', charset='utf8')
-cur = conn.cursor()
+import db_connect
 kkma = Kkma()
+db = db_connect.Connect()
+cur = db.get_cursor()
 
 
 #조건부 확률 계산
@@ -70,3 +70,6 @@ if result_pos > result_neg:
     print(u'긍정')
 else:
     print(u'부정')
+
+
+db.close_db()
