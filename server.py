@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-app = Flask(__name__)
+from flask import Flask, render_template, send_from_directory
+app = Flask(__name__, static_url_path='/static')
 
 @app.route("/")
 def index():
@@ -7,4 +7,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=8009)
+    app.run(host='0.0.0.0', port=8009)
