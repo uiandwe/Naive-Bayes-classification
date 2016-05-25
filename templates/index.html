@@ -5,30 +5,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="/static/css/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
 </head>
 <body>
-
-<div class="container-fluid">
-  <div class="inner">
-        <h2>긍정 부정 문장 확인</h2>
-        <div class="">
-            <form role="form">
-                <div class="form-group">
-                    <textarea rows="4" cols="100"></textarea>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-default">Submit</button>
+<div class="layer">
+    <div class="container">
+      <div class="inner">
+            <h2 class="title"><i class="fa fa-search" aria-hidden="true"></i>긍정 부정</h2>
+            <div class="form-wrapper">
+                <form role="form">
+                    <div class="form-group">
+                        <textarea rows="4" cols="101" name="total_search" id="total_search" value="" autofocus="autofocus" class="form-control ui-autocomplete-input" placeholder="그녀는 아름답다." autocomplete="off"></textarea>
                     </div>
-                  </div>
-            </form>
-        </div>
-  </div>
+                    <div class="form-group">
+                        <div class="submit-group">
+                          <button type="submit" class="btn btn-default">확인</button>
+                        </div>
+                      </div>
+                </form>
+            </div>
+            <div class="ex">
+                <div class="positive">
+                    <span class="col-sm-4">아름답</span>
+                    <span class="col-sm-4">VA</span>
+                    <span class="col-sm-4 last">긍정</span>
+                </div>
+                <div class="negative">
+                    <span class="col-sm-4">더러</span>
+                    <span class="col-sm-4">VA</span>
+                    <span class="col-sm-4 last">부정</span>
+                </div>
+            </div>
+      </div>
+    </div>
+    <span class="blank"></span>
 </div>
-
 </body>
 </html>
