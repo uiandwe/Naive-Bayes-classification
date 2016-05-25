@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/static/css/index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="/static/js/jquery.form.min.js"></script>
+    <script src="/static/js/index.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
 </head>
 <body>
@@ -18,13 +21,13 @@
       <div class="inner">
             <h2 class="title"><i class="fa fa-search" aria-hidden="true"></i>긍정 부정</h2>
             <div class="form-wrapper">
-                <form role="form">
+                <form method="post" class="">
                     <div class="form-group">
-                        <textarea rows="4" cols="101" name="total_search" id="total_search" value="" autofocus="autofocus" class="form-control ui-autocomplete-input" placeholder="그녀는 아름답다." autocomplete="off"></textarea>
+                        <textarea rows="4" cols="101" name="sentence" id="sentence" value="" autofocus="autofocus" class="form-control ui-autocomplete-input" placeholder="그녀는 아름답다." autocomplete="off"></textarea>
                     </div>
                     <div class="form-group">
                         <div class="submit-group">
-                          <button type="submit" class="btn btn-default">확인</button>
+                          <button type="button" class="btn btn-default" id="sentence_btn">확인</button>
                         </div>
                       </div>
                 </form>
@@ -44,6 +47,7 @@
       </div>
     </div>
     <span class="blank"></span>
+    <iframe id="hidden-iframe" style="display:none;"></iframe>
 </div>
 </body>
 </html>
