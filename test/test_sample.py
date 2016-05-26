@@ -14,4 +14,4 @@ def test_sentence_to_kkma():
 
 def test_run_word_decision():
     assert word_decision.run_word_decision([('너', 'NP'), ('는', 'JX'), ('아름답', 'VA'), ('다', 'EFN'), ('.', 'SF')]) == \
-           "['긍정', ('너', 'NP'), ('는', 'JX'), ('아름답', 'VA'), ('다', 'EFN'), ('.', 'SF')]"
+           "긍정"

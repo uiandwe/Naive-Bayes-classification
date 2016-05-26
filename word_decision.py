@@ -71,7 +71,7 @@ def get_word_counts():
 
 
 def run_word_decision(input_kkma):
-    return_list = []
+
     test_output = []
     for i in input_kkma:
         test_output.append(i[0])
@@ -90,9 +90,7 @@ def run_word_decision(input_kkma):
         print(u'부정')
 
     db.close_db()
-    return_list.append(return_decision)
-    return_list.append(input_kkma)
-    return return_list
+    return return_decision
 
 if __name__ == '__main__':
     input_kkma = get_input_file()
