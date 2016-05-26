@@ -44,6 +44,17 @@ def get_input_file():
     return input_kkma_str
 
 
+def sentence_to_kkma(word):
+
+    if len(word) < 1:
+        return False
+
+    kkma = Kkma()
+    input_kkma_str = kkma.pos(word)
+
+    return input_kkma_str
+
+
 #긍정 부정 단어 전체 갯수
 def get_word_counts():
 
