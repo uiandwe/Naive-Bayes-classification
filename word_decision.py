@@ -69,6 +69,31 @@ def get_word_counts():
 
     return positive_word_count, negative_word_count
 
+
+def run_word_decision(input_kkma):
+    return_list = []
+    test_output = []
+    for i in input_kkma:
+        test_output.append(i[0])
+
+    positive_count, negative_count = get_word_counts()
+
+    # naive bayes 값 계산
+    result_pos = conditional_probability(test_output, 'positive', positive_count+negative_count, positive_count)
+    result_neg = conditional_probability(test_output, 'negative', positive_count+negative_count, negative_count)
+
+    return_decision = False
+    if result_pos > result_neg:
+        print(u'긍정')
+        return_decision = True
+    else:
+        print(u'부정')
+
+    db.close_db()
+    return_list.append(return_decision)
+    return_list.append(input_kkma)
+    return return_list
+
 if __name__ == '__main__':
     input_kkma = get_input_file()
     print(input_kkma)
