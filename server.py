@@ -8,7 +8,9 @@ def index():
 
         sentence = request.form['sentence']
         if len(sentence) < 1:
-            return
+            json = {'status': "success", 'data': "", 'message': "문장이 너무 짧습니다."}
+            return jsonify(results=json)
+
         morpheme = word_decision.sentence_to_kkma(sentence)
         return_value = word_decision.run_word_decision(morpheme)
         return_word_dicision = [return_value, morpheme, request.form['sentence']]

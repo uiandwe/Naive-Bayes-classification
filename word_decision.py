@@ -82,10 +82,10 @@ def run_word_decision(input_kkma):
     result_pos = conditional_probability(test_output, 'positive', positive_count+negative_count, positive_count)
     result_neg = conditional_probability(test_output, 'negative', positive_count+negative_count, negative_count)
 
-    return_decision = False
+    return_decision = "부정"
     if result_pos > result_neg:
         print(u'긍정')
-        return_decision = True
+        return_decision = "긍정"
     else:
         print(u'부정')
 

@@ -9,7 +9,7 @@ $(function(){
             type: "post",
             success : function(json) {
                 json = json.results;
-                if(json.data) {
+                if(json.message == "true") {
                     str = json.data[0];
                     $("#word_decision").append("<h3>"+str+"</h3>");
                     str1 = ""
@@ -20,7 +20,9 @@ $(function(){
                     $("#word_decision").append("<div >"+str1+"</div>");
                     str = json.data[2]
                     $("#word_decision").append("<div >"+str+"</div>");
-                    console.log(json.data);
+                }
+                else{
+                    alert(json.message);
                 }
             },
             error : function(b1, b2, b3) {
