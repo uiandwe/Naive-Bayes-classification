@@ -1,67 +1,5 @@
-
-
-
 $(function(){
-//        $("form[method=post]").submit(function(e){
-//        e.preventDefault();
-//        var $form = $(this);
-//        var successReturnUrl = $form.attr("data-success-return-url");
-//        var errorReturnUrl = $form.attr("data-error-return-url");
-//
-//        $form.ajaxSubmit({
-//            type : 'post',
-//            dataType : 'json',
-//            iframe : true,
-//            target : '#hidden-iframe',
-//            success : function(json) {
-//                if(json.status=="success") {
-//                    var message = $form.attr("data-success-message");
-//                    if (typeof message !== typeof undefined && message !== false) {
-//                        if(message) {
-//                            alert(message);
-//                        }
-//                    }
-//                    else {
-//                        alert(json.message);
-//                    }
-//
-//                    if(successReturnUrl) {
-//                        location.href = successReturnUrl;
-//                    }
-//                    else {
-//                        location.reload(true);
-//                    }
-//                }
-//                else {
-//                    alert(json.message);
-//
-//                    if(errorReturnUrl) {
-//                        location.href = errorReturnUrl;
-//                    }
-//                    else {
-//
-//                        if(json.data) {
-//                            $form.find("[name="+json.data+"]").focus();
-//                        }
-//
-//                    }
-//                }
-//            },
-//            error : function(data) {
-//                //alert("error");
-//
-//
-//
-//            },
-//            complete : function(data) {
-//
-//            }
-//        });
-//
-//    });
-
     $("#sentence_btn").on("click", function(e){
-
         var $sentence = $(document).find("#sentence").val();
         $.ajax({
             async : false,
@@ -72,7 +10,17 @@ $(function(){
             success : function(json) {
                 json = json.results;
                 if(json.data) {
-
+                    str = json.data[0];
+                    $("#word_decision").append("<h3>"+str+"</h3>");
+                    str1 = ""
+                    word_list = json.data[1];
+                    for(var i in word_list){
+                        str1 += "<span class='word_token'><span><strong>"+word_list[i][0]+"</strong></span><span>["+word_list[i][1]+"]</span></span>"
+                    }
+                    $("#word_decision").append("<div >"+str1+"</div>");
+                    str = json.data[2]
+                    $("#word_decision").append("<div >"+str+"</div>");
+                    console.log(json.data);
                 }
             },
             error : function(b1, b2, b3) {
@@ -81,6 +29,5 @@ $(function(){
         });
 
     });
-
 
 });

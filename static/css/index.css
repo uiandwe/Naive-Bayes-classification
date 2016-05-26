@@ -76,3 +76,15 @@ h2.title{
 .ex .positive span.last, .ex .negative span.last{
     color: #EA4C89;
 }
+
+#word_decision{
+
+}
+
+#word_decision h3{
+    color: #EA4C89;
+}
+
+#word_decision .word_token{
+    margin-right: 5px;
+}
