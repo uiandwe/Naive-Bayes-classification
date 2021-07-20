@@ -38,7 +38,7 @@ konlpy		:	http://konlpy.org/
 --------------------
 
 확률 공간 Ω에서의 두 사건 A, B에 대해서 P(B) > 0일 때 사건 B가 일어났을 때 사건 A의 조건부 확률은
-[![](http://cfile3.uf.tistory.com/image/2411EF365730A5C42F5861)]
+![](https://github.com/uiandwe/Naive-Bayes-classification/blob/master/Bayes'%20theorem.png)
 
 긍정 부정 두가지 상황이 있으므로
 
@@ -49,11 +49,12 @@ P1(x|c) = count(해당 문장에서 긍정 단어 리스트 수 ) / count(전체
 
 P2(x|c) = count(해당 문장에서 부정 단어 리스트 수 ) / count(전체 부정 단어 리스트 수 )
 
-
+```
 if p1 > p2:
 
-   긍정
+  긍정
 
 else:
 
   부정
+```
